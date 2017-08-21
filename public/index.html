@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Imageboard</title>
+    <link rel="stylesheet" href="/stylesheet.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <h1>Share your best holiday accommodation tips</h1>
+
+    <nav>
+        <ul>
+            <li><a href="/#home">HOME</a></li>
+            <li><a href="/#upload">UPLOAD YOUR IMAGE</a></li>
+        </ul>
+    </nav>
+
+    <div id='main'>
+    </div>
+
+    <template id='home'>
+        {{#each images}}
+        <div class='image-item'>
+            <a href="/#image/{{id}}" id='linkki'><div class='image'><img src='{{url}}'></div></a>
+            <p class='username'>{{username}}</p>
+            <p class='title'>{{title}}</p>
+            <p>{{description}}</p>
+        </div>
+        {{/each}}
+    </template>
+
+
+
+    <template id='image'>
+        <div class='image-area'>
+            {{#each imageData}}
+            <div class='image'><img src='{{url}}' id='big-image'></div>
+            <p class='username-image'>{{username}}</p>
+            <p class='title-image'>{{title}}</p>
+            <p class='description-image'>{{description}}</p>
+            {{/each}}
+        </div>
+        <div class='comments'>
+            {{#each commentData}}
+            <p class="commenter-name">{{username}}</p>
+            <p class="comment">"{{comment}}"</p>
+            {{/each}}
+        </div>
+        <form id='comment-form'>
+            <h3>Leave your comments here</h3>
+            <label for="name">Username</label><br>
+            <input type="text" id="image-username" name="username" required><br>
+            <label for="comment">Comment</label><br>
+            <input type="text" id="image-comment" name="comment" required><br>
+            <button type="submit" id='comment-button'>Submit</button>
+        </form>
+    </template>
+
+
+
+    <template id='upload'>
+        <form id='upload-form'>
+            <label for="name" id='name'>Username</label><br>
+            <input type="text" id="username" name="username" required><br>
+            <label for="title">Title</label><br>
+            <input type="text" id="title" name="title" required><br>
+            <label for="description">Description</label><br>
+            <input type="text" id="description" name="description" required><br>
+            <div class="fileUpload btn btn-primary">
+                <span>Choose a file</span>
+                <input type="file" class="upload" />
+            </div>
+            <button type="submit" id='upload-button'>Submit</button>
+        </form>
+        <div id="success"></div>
+    </template>
+
+
+    <script src="/js/jquery-3.1.1.min.js"></script>
+    <script src="/js/handlebars.min.js"></script>
+    <script src="/js/underscore-min.js"></script>
+    <script src="/js/backbone-min.js"></script>
+    <script type="text/javascript" src="/js/script.js"></script>
+
+</body>
+</html>
