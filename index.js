@@ -10,6 +10,8 @@ const bucketName = 'inasimage';
 const functions = require('./models/models.js');
 
 
+//      SETUP
+
 app.use(bodyParser.urlencoded({
     extended: false
 }));
@@ -35,6 +37,10 @@ var uploader = multer({
         filesize: 2097152
     }
 });
+
+
+
+//      ROUTES
 
 
 app.get('/getHomeImages', function(req, res) {
@@ -64,11 +70,9 @@ app.get('/image/:imageId', function(req, res) {
         }
 
         functions.getComments(req.params.imageId).then(function(data) {
-            // console.log(data);
             for (var i = 0; i < data.rows.length; i++) {
                 imageAndComments.commentData.push(data.rows[i]);
             }
-            // console.log(imageAndComments);
             res.send(imageAndComments);
         });
 
@@ -79,7 +83,6 @@ app.get('/image/:imageId', function(req, res) {
 
 
 app.post('/comment', function(req, res) {
-    // console.log(req.body);
     functions.addComment(req.body).then(function() {
     }).catch(function(err){
         console.log('error message', err);
